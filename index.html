@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dress Up Game 💕</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="game-container">
+    <!-- Left Clothes -->
+    <div class="clothes-menu left">
+      <h2>Tops & Jackets</h2>
+      <div class="items">
+        <img src="assets/shirt1.png" draggable="true" class="item" data-layer="outerlayer">
+        <img src="assets/shirt2.png" draggable="true" class="item" data-layer="top">
+        <img src="assets/shirt4.png" draggable="true" class="item" data-layer="top">
+        <img src="assets/tshirt1.png" draggable="true" class="item" data-layer="top">
+        <img src="assets/tshirt2.png" draggable="true" class="item" data-layer="top">
+        <img src="assets/tshirt3.png" draggable="true" class="item" data-layer="top">
+        <img src="assets/jacket1.png" draggable="true" class="item" data-layer="outerlayer">
+        <img src="assets/jacket2.png" draggable="true" class="item" data-layer="outerlayer">
+        <img src="assets/jacket3.png" draggable="true" class="item" data-layer="outerlayer">
+        <img src="assets/scarf.png" draggable="true" class="item" data-layer="accessory">
+      </div>
+    </div>
+
+    <!-- Model in Center -->
+    <div class="model-area" id="modelArea">
+      <img src="assets/ministoo.png" alt="Base Model" id="base" />
+    </div>
+
+    <!-- Right Clothes -->
+    <div class="clothes-menu right">
+      <h2>Bottoms & Shoes</h2>
+      <div class="items">
+        <img src="assets/pant1.png" draggable="true" class="item" data-layer="bottom">
+        <img src="assets/pant2.png" draggable="true" class="item" data-layer="bottom">
+        <img src="assets/pant3.png" draggable="true" class="item" data-layer="bottom">
+        <img src="assets/shoe1.png" draggable="true" class="item" data-layer="shoe">
+        <img src="assets/shoe2.png" draggable="true" class="item" data-layer="shoe">
+      </div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button id="resetBtn">🔄 Reset</button>
+    <button id="screenshotBtn">📸 Screenshot</button>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
