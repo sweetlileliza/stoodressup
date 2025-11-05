@@ -72,11 +72,17 @@ body {
 }
 
 #base {
-  width: 55%;
+  width: 60%;
   height: auto;
   max-height: 80vh;
   position: relative;
   z-index: 1;
+}
+
+@media (max-width: 768px) {
+  #base {
+    transform: scale(0.94);
+  }
 }
 
 .clothing-layer {
