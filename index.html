@@ -3,10 +3,255 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dress Up Game 💕</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>Help Lovely Little Stoo Dress Up 💕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(180deg, #fff0f7, #ffeaf5);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .game-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100vw;
+      height: 100vh;
+      padding: 0 20px;
+      gap: 12px;
+    }
+
+    /* Clothes menu */
+    .clothes-menu {
+      flex: 1;
+      height: 85vh;
+      background: rgba(255, 255, 255, 0.7);
+      border: 2px solid #ffd6e0;
+      border-radius: 25px;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-y: auto;
+      scrollbar-width: none;
+      box-shadow: 0 4px 12px rgba(255, 150, 190, 0.15);
+      backdrop-filter: blur(6px);
+    }
+
+    .clothes-menu::-webkit-scrollbar {
+      display: none;
+    }
+
+    .clothes-menu h2 {
+      color: #ff80aa;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+      text-shadow: 0 1px 2px rgba(255, 120, 150, 0.3);
+    }
+
+    .items {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .item {
+      width: 75px;
+      cursor: grab;
+      border-radius: 10px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .item:hover {
+      transform: scale(1.1);
+      box-shadow: 0 3px 6px rgba(255, 120, 180, 0.25);
+    }
+
+    /* Model area */
+    .model-area {
+      flex: 1.2;
+      position: relative;
+      height: 85vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: visible;
+    }
+
+    #base {
+      width: 60%;
+      height: auto;
+      max-height: 80vh;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 5px 10px rgba(255, 140, 170, 0.15));
+    }
+
+    .clothing-layer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      width: 60%;
+      transition: opacity 0.3s ease;
+    }
+
+    /* Toolbar */
+    .controls {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 18px;
+      background: rgba(255, 214, 224, 0.9);
+      padding: 10px 20px;
+      border-radius: 40px;
+      box-shadow: 0 6px 12px rgba(255, 120, 160, 0.2);
+      backdrop-filter: blur(5px);
+      z-index: 9999;
+    }
+
+    .controls button {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .controls button:hover {
+      transform: scale(1.15);
+    }
+
+    /* Mobile layout */
+    @media (max-width: 900px) {
+      body {
+        overflow-y: auto;
+      }
+
+      .game-container {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+        gap: 15px;
+      }
+
+      .clothes-menu {
+        width: 95%;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        justify-content: flex-start;
+        padding: 10px;
+      }
+
+      .items {
+        flex-wrap: nowrap;
+      }
+
+      .model-area {
+        width: 100%;
+        height: 65vh;
+      }
+
+      #base {
+        width: 65%;
+        transform: scale(0.93);
+      }
+
+      .item {
+        width: 65px;
+      }
+
+      .controls {
+        bottom: 12px;
+        padding: 8px 16px;
+        gap: 12px;
+      }
+    }
+
+    /* Intro Popup */
+    .popup {
+      position: fixed;
+      inset: 0;
+      background: rgba(255, 240, 247, 0.97);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      animation: fadeIn 0.6s ease forwards;
+      font-family: 'Comic Sans MS', cursive;
+    }
+
+    .popup-content {
+      background: white;
+      border: 3px solid #ffb6c1;
+      border-radius: 25px;
+      padding: 35px 45px;
+      text-align: center;
+      box-shadow: 0 8px 20px rgba(255, 100, 150, 0.15);
+      animation: bounceIn 0.8s ease;
+    }
+
+    .popup-content p {
+      font-size: 1.5rem;
+      color: #ff66a3;
+      margin-bottom: 25px;
+    }
+
+    .popup-content button {
+      background: #ff99cc;
+      border: none;
+      border-radius: 12px;
+      padding: 12px 28px;
+      font-size: 1.1rem;
+      color: white;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.25s ease;
+    }
+
+    .popup-content button:hover {
+      background: #ff66a3;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0.5); opacity: 0; }
+      60% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+  </style>
 </head>
+
 <body>
+  <!-- Popup -->
+  <div id="introPopup" class="popup">
+    <div class="popup-content">
+      <p>Help lovely little Stoo dress up!</p>
+      <button id="startButton">Go!</button>
+    </div>
+  </div>
+
   <div class="game-container">
     <!-- Left Clothes -->
     <div class="clothes-menu left">
@@ -25,9 +270,9 @@
       </div>
     </div>
 
-    <!-- Model in Center -->
+    <!-- Model -->
     <div class="model-area" id="modelArea">
-      <img src="ministoo.png" alt="Base Model" id="base" />
+      <img src="ministoo.png" alt="Base Model" id="base">
     </div>
 
     <!-- Right Clothes -->
@@ -43,13 +288,75 @@
     </div>
   </div>
 
+  <!-- Toolbar -->
   <div class="controls">
-    <button id="resetBtn">🔄 Reset</button>
-    <button id="screenshotBtn">📸 Screenshot</button>
+    <button id="resetBtn" title="Reset"><img src="reset.png" alt="Reset" width="24"></button>
+    <button id="randomizeBtn" title="Randomize"><img src="Dice.png" alt="Reset" width="24"></button>
   </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  <script src="script.js"></script>
+  <script>
+    const popup = document.getElementById("introPopup");
+    const startButton = document.getElementById("startButton");
+    startButton.addEventListener("click", () => popup.style.display = "none");
+
+    const items = document.querySelectorAll('.item');
+    const modelArea = document.getElementById('modelArea');
+    const resetBtn = document.getElementById('resetBtn');
+    const randomizeBtn = document.getElementById('randomizeBtn');
+
+    const zIndexMap = { shoe: 1, bottom: 2, top: 3, outerlayer: 4, accessory: 5 };
+
+    // Drag and drop
+    items.forEach(item => item.addEventListener('dragstart', dragStart));
+    modelArea.addEventListener('dragover', e => e.preventDefault());
+    modelArea.addEventListener('drop', drop);
+
+    function dragStart(e) {
+      e.dataTransfer.setData('src', e.target.src);
+      e.dataTransfer.setData('layer', e.target.dataset.layer);
+    }
+
+    function drop(e) {
+      e.preventDefault();
+      const src = e.dataTransfer.getData('src');
+      const layer = e.dataTransfer.getData('layer');
+      applyClothing(src, layer);
+    }
+
+    // Mobile tap
+    if ('ontouchstart' in window) {
+      items.forEach(item => item.addEventListener('click', () => applyClothing(item.src, item.dataset.layer)));
+    }
+
+    function applyClothing(src, layer) {
+      const existing = modelArea.querySelector(`.clothing-layer[data-layer="${layer}"]`);
+      if (existing) existing.remove();
+
+      const clothing = document.createElement('img');
+      clothing.src = src;
+      clothing.classList.add('clothing-layer');
+      clothing.dataset.layer = layer;
+      clothing.style.zIndex = zIndexMap[layer] || 2;
+      modelArea.appendChild(clothing);
+    }
+
+    // Reset
+    resetBtn.addEventListener('click', () => {
+      document.querySelectorAll('.clothing-layer').forEach(c => c.remove());
+    });
+
+    // Randomize
+    randomizeBtn.addEventListener('click', () => {
+      document.querySelectorAll('.clothing-layer').forEach(c => c.remove());
+      const categories = ['top', 'bottom', 'outerlayer', 'shoe'];
+      categories.forEach(cat => {
+        const options = Array.from(items).filter(i => i.dataset.layer === cat);
+        if (options.length > 0) {
+          const randomItem = options[Math.floor(Math.random() * options.length)];
+          applyClothing(randomItem.src, cat);
+        }
+      });
+    });
+  </script>
 </body>
 </html>
-
