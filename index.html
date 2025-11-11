@@ -30,6 +30,7 @@
       height: 100vh;
       padding: 0 20px;
       gap: 12px;
+      position: relative;
     }
 
     /* Clothes menu */
@@ -111,30 +112,58 @@
 
     /* Toolbar */
     .controls {
-      position: fixed;
+      position: absolute;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 18px;
-      background: rgba(255, 214, 224, 0.9);
-      padding: 10px 20px;
+      gap: 20px;
+      background: rgba(255, 214, 224, 0.8);
+      padding: 10px 18px;
       border-radius: 40px;
-      box-shadow: 0 6px 12px rgba(255, 120, 160, 0.2);
-      backdrop-filter: blur(5px);
-      z-index: 9999;
+      box-shadow: 0 4px 10px rgba(255, 120, 160, 0.15);
+      z-index: 10;
+      transition: all 0.3s ease;
     }
 
     .controls button {
-      background: none;
+      background-color: #ffb6c1;
       border: none;
-      font-size: 24px;
+      border-radius: 50%;
+      width: 55px;
+      height: 55px;
+      font-size: 1.5rem;
       cursor: pointer;
-      transition: transform 0.2s ease;
+      color: white;
+      transition: transform 0.2s ease, background 0.2s ease;
     }
 
     .controls button:hover {
-      transform: scale(1.15);
+      transform: scale(1.1);
+      background: #ff99bb;
+    }
+
+    /* 🎀 MOBILE VIEW: move buttons to left & right of model */
+    @media (max-width: 768px) {
+      .controls {
+        top: 50%;
+        bottom: auto;
+        left: 0;
+        width: 100%;
+        justify-content: space-between;
+        transform: translateY(-50%);
+        background: none;
+        box-shadow: none;
+        padding: 0 18px;
+      }
+
+      .controls button {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+        background-color: rgba(255, 182, 193, 0.9);
+        backdrop-filter: blur(3px);
+      }
     }
 
     /* Mobile layout */
@@ -176,12 +205,6 @@
 
       .item {
         width: 65px;
-      }
-
-      .controls {
-        bottom: 12px;
-        padding: 8px 16px;
-        gap: 12px;
       }
     }
 
@@ -286,12 +309,12 @@
         <img src="shoe2.png" draggable="true" class="item" data-layer="shoe">
       </div>
     </div>
-  </div>
 
-  <!-- Toolbar -->
-  <div class="controls">
-    <button id="resetBtn" title="Reset"><img src="reset.png" alt="Reset" width="24"></button>
-    <button id="randomizeBtn" title="Randomize"><img src="Dice.png" alt="Reset" width="24"></button>
+    <!-- Toolbar -->
+    <div class="controls">
+      <button id="resetBtn" title="Reset"><img src="reset.png" alt="Reset" width="24"></button>
+      <button id="randomizeBtn" title="Randomize"><img src="Dice.png" alt="RAND" width="24"></button>
+    </div>
   </div>
 
   <script>
